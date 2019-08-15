@@ -37,7 +37,7 @@
                     {% endif %}
                     {{ login_form.login_password.label(for="loginPassword") }}
                   </div>
-                  {{ login_form.submit(class="btn btn-lg btn-primary btn-block text-uppercase",id="logIn") }}
+                  {{ login_form.login_submit(class="btn btn-lg btn-primary btn-block text-uppercase",id="logIn") }}
                 </form>
               </div>
             </div>
@@ -93,7 +93,7 @@
                     {{ reg_form.reg_password.label(for="regPassword") }}
                   </div>
 
-                  {{ reg_form.submit(class="btn btn-lg btn-primary btn-block text-uppercase",id="register") }}
+                  {{ reg_form.reg_submit(class="btn btn-lg btn-primary btn-block text-uppercase",id="register") }}
 
                 </form>
               </div>

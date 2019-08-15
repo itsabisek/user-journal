@@ -1,7 +1,8 @@
-from user_journal import app, bcrypt, db
+from user_journal import app, bcrypt, db, login_manager
 from user_journal.forms import RegForm, LoginForm
 from user_journal.models import User, Journal
 from flask import redirect, render_template, url_for, request, flash
+from flask_login import login_user
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -10,7 +11,18 @@ def home():
     reg_form = RegForm()
     login_form = LoginForm()
 
-    if reg_form.validate_on_submit():
+    if login_form.login_submit.data and login_form.validate_on_submit():
+        username = login_form.login_username.data
+        password = login_form.login_password.data
+        user = User.query.filter_by(username=username).first()
+        if user and bcrypt.check_password_hash(user.password, password):
+            flash("Login Successful!", 'success')
+            login_user(user, remember=False)
+            return redirect(url_for('login', _method='POST'))
+
+        flash("Username/Password does not exist. Please try with a valid username/password", 'danger')
+
+    if reg_form.reg_submit.data and reg_form.validate_on_submit():
         username = reg_form.reg_username.data
         if reg_form.validate_input(username):
             name = reg_form.name.data
@@ -22,15 +34,6 @@ def home():
             return redirect(url_for('register', _method='POST'))
 
         flash("Username already exists. Please try another username!!", "danger")
-        return redirect(url_for('home'))
-
-    # elif login_form.validate_on_submit():
-    #     username = reg_form.username.data
-    #     password = reg_form.password.data
-    #     if login_form.validate_input(username, password):
-    #         print("validated")
-    #         return redirect(url_for('login'))
-    #     return render_template('home.html', reg_form=reg_form, login_form=login_form, reg_error=False, login_error=True)
 
     return render_template('home.html', reg_form=reg_form, login_form=login_form)
 

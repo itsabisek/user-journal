@@ -9,7 +9,7 @@ class RegForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()], id="regName")
     reg_username = StringField('Username', validators=[Length(min=2, max=16), DataRequired()], id="regUsername")
     reg_password = PasswordField('Password', validators=[Length(min=6), DataRequired()], id="regPassword")
-    submit = SubmitField('Register')
+    reg_submit = SubmitField('Register')
 
     def validate_input(self, username):
         user = User.query.filter_by(username=username).first()
@@ -21,5 +21,5 @@ class RegForm(FlaskForm):
 class LoginForm(FlaskForm):
     login_username = StringField('Username', validators=[DataRequired()],  _name='loginUsername',id="loginUsername")
     login_password = PasswordField('Password', validators=[DataRequired()],  _name='loginPassword',id="loginPassword")
-    submit = SubmitField('Log In')
+    login_submit = SubmitField('Log In')
 
