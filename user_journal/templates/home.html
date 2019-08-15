@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container login-container">
+      <div class="row">
+      <div class="col-md-6 login-form-1">
+          <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5">
+              <div class="card-body">
+                <h5 class="card-title text-center">Already have an account?</h5>
+                  <hr class="my-3">
+                <form class="form-signin" method="POST" action="" style="display: block;">
+                  {{ login_form.hidden_tag() }}
+                  <div class="form-label-group">
+                    {% if login_form.login_username.errors %}
+                      {{ login_form.login_username(class="form-control is-invalid", placeholder="Username") }}
+                      <div class="invalid-feedback">
+                        {% for error in login_form.login_username.errors %}
+                          <span>{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                    {% else %}
+                      {{ login_form.login_username(class="form-control", placeholder="Username", autofocus=True) }}
+                    {% endif %}
+                    {{ login_form.login_username.label(for="loginUsername") }}
+                  </div>
+
+                  <div class="form-label-group">
+                      {% if login_form.login_password.errors %}
+                        {{ login_form.login_password(class="form-control is-invalid", placeholder="Password") }}
+                      <div class="invalid-feedback">
+                        {% for error in login_form.login_password.errors %}
+                          <span>{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                    {% else %}
+                      {{ login_form.login_password(class="form-control", placeholder="Password") }}
+                    {% endif %}
+                    {{ login_form.login_password.label(for="loginPassword") }}
+                  </div>
+                  {{ login_form.submit(class="btn btn-lg btn-primary btn-block text-uppercase",id="logIn") }}
+                </form>
+              </div>
+            </div>
+          </div>
+         </div>
+         <div class="col-md-6 login-form-2">
+             <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5">
+              <div class="card-body">
+                <h5 class="card-title text-center">New Here?</h5>
+                  <hr class="my-3">
+                <form class="form-reg" method="POST" action="" style="display: block;">
+                  {{ reg_form.hidden_tag() }}
+                  <div class="form-label-group">
+                      {% if reg_form.name.errors %}
+                          {{ reg_form.name(class="form-control is-invalid", placeholder="Name") }}
+                          <div class="invalid-feedback">
+                            {% for error in reg_form.name.errors %}
+                              <span>{{ error }}</span>
+                            {% endfor %}
+                          </div>
+                    {% else %}
+                      {{ reg_form.name(class="form-control", placeholder="Name") }}
+                    {% endif %}
+                    {{ reg_form.name.label(for="regName") }}
+                  </div>
+
+                  <div class="form-label-group">
+                      {% if reg_form.reg_username.errors %}
+                          {{ reg_form.reg_username(class="form-control is-invalid", placeholder="Username") }}
+                          <div class="invalid-feedback">
+                            {% for error in reg_form.reg_username.errors %}
+                              <span>{{ error }}</span>
+                            {% endfor %}
+                          </div>
+                    {% else %}
+                      {{ reg_form.reg_username(class="form-control", placeholder="Username") }}
+                    {% endif %}
+                    {{ reg_form.reg_username.label(for="regUsername") }}
+                  </div>
+
+                  <div class="form-label-group">
+                      {% if reg_form.reg_password.errors %}
+                          {{ reg_form.reg_password(class="form-control is-invalid", placeholder="Password") }}
+                          <div class="invalid-feedback">
+                            {% for error in reg_form.reg_password.errors %}
+                              <span>{{ error }}</span>
+                            {% endfor %}
+                          </div>
+                    {% else %}
+                      {{ reg_form.reg_password(class="form-control", placeholder="Password") }}
+                    {% endif %}
+                    {{ reg_form.reg_password.label(for="regPassword") }}
+                  </div>
+
+                  {{ reg_form.submit(class="btn btn-lg btn-primary btn-block text-uppercase",id="register") }}
+
+                </form>
+              </div>
+            </div>
+          </div>
+         </div>
+    </div>
+    </div>
+{% endblock content %}
