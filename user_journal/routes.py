@@ -45,12 +45,12 @@ def about():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html', title="Register")
+    return render_template('user.html', title="Register")
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html', title="Register")
+    return render_template('user.html', title="Register")
 
 
 @app.route('/user/<username>')

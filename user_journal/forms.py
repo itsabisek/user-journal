@@ -1,8 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length
-from user_journal.models import User, Journal
-from user_journal import bcrypt
+from user_journal.models import User
 
 
 class RegForm(FlaskForm):
@@ -19,7 +18,6 @@ class RegForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    login_username = StringField('Username', validators=[DataRequired()],  _name='loginUsername',id="loginUsername")
-    login_password = PasswordField('Password', validators=[DataRequired()],  _name='loginPassword',id="loginPassword")
+    login_username = StringField('Username', validators=[DataRequired()], _name='loginUsername', id="loginUsername")
+    login_password = PasswordField('Password', validators=[DataRequired()], _name='loginPassword', id="loginPassword")
     login_submit = SubmitField('Log In')
-
