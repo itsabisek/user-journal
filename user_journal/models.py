@@ -1,11 +1,17 @@
 from datetime import datetime
 from user_journal import db, login_manager
 from flask_login import UserMixin
+from flask import redirect, url_for
 
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect(url_for('home'))
 
 
 class User(db.Model, UserMixin):

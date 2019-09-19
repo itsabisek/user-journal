@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="{{ url_for('profile') }}">Profile
+              <a class="nav-link" href="{{ url_for('user') }}">Journals
                         <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -27,12 +27,15 @@
 {% endblock navbar %}
 
 {% block content %}
-    <div class="container login-container">
-        <form class="form-signin" method="POST" action="" style="display: block;">
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Please write your new journal here</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-        </form>
-    </div>
+    div class="form-label-group">
+    <div class="invalid-feedback">
+            {% for error in login_form.login_password.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ login_form.login_password(class="form-control", placeholder="Password") }}
+        {% endif %}
+        {{ login_form.login_password.label(for="loginPassword") }}
+        </div>
 {% endblock content %}
